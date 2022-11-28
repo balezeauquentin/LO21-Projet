@@ -10,10 +10,17 @@ typedef Chaine_de_bit *Listebit;
 
 typedef struct Individu {
     Listebit liste_de_bit;
-    int valeur;
+    double valeur;
+    double qualite;
     struct Individu *next;
-} Individu;
-typedef Individu *List_individu;
+}Individu;
+typedef Individu *Stat_individu;
+
+typedef struct Population{
+    Stat_individu individu;
+}Population;
+typedef Population * Liste_population;
+
 
 
 Listebit ajout_tete_bit(Listebit l, Bit new_value);

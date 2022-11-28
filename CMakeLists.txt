@@ -3,4 +3,4 @@ project(LO21_projet C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(LO21_projet main.c liste.c liste.h Individu.c Individu.h)
+add_executable(LO21_projet main.c liste.c liste.h Individu.c Individu.h Population.c Population.h)

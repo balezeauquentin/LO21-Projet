@@ -4,6 +4,7 @@
 #define LO21_PROJET_INDIVIDU_H
 
 
-Listebit Initialisation(int longIndiv);
-
+Listebit InitialisationIndiv (int longIndiv);
+double ValeurIndiv (Listebit liste);
+double QualiteIndiv (double Valeur,int Taille);
 #endif //LO21_PROJET_INDIVIDU_H

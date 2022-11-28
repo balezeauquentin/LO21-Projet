@@ -41,7 +41,6 @@ Listebit supp_tete_bit(Listebit l) {
     Listebit tempo;
     tempo = (Listebit) malloc(sizeof(Chaine_de_bit));
     if (l == NULL) {
-        printf("rien a supprimer liste déjà vide");
         return l;
     } else {
         tempo = l->next;
@@ -55,7 +54,6 @@ Listebit supp_fin_bit(Listebit l) {
     temp = (Listebit) malloc(sizeof(Chaine_de_bit));
     temp = l;
     if (l == NULL) {
-        printf("rien a supprimer liste déjà vide");
         return l;
     }
     while (temp->next->next != NULL) {
