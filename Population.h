@@ -1,5 +1,15 @@
-#include "liste.h"
+#include "liste_bit.h"
+#include "Individu.h"
 #ifndef INDIVIDU_H_POPULATION_H
 #define INDIVIDU_H_POPULATION_H
+
+
+typedef struct Population{
+    Liste_individu indivs;
+}Population;
+
 Population Initialisationpop (int taille);
+
+int taille_population(Population pop);
+
 #endif //INDIVIDU_H_POPULATION_H

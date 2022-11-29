@@ -1,6 +1,6 @@
 #include <malloc.h>
 #include <stdio.h>
-#include "liste.h"
+#include "liste_bit.h"
 #include "Individu.h"
 
 
