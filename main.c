@@ -5,7 +5,9 @@
 
 int main() {
     //Initialisationpop(4);
-
+/*
+ * salut c'est moi c'est un test.
+ */
     //test liste de bits
 
     Listebit l= initialisation_liste_bits(6);
