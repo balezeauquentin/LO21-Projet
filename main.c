@@ -6,7 +6,7 @@
 #include <time.h>
 
 int main() {
-    //Initialisationpop(4);
+
 /*
  * salut c'est moi c'est un test.
  */
@@ -18,6 +18,9 @@ int main() {
     printf("liste 2");
     Listebit l2= initialisation_liste_bits(6);
     afficher_list_bit(l2);
+
+
+    //Initialisationpop(4);
 
     //test liste d'individus
 

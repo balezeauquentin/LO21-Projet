@@ -11,5 +11,6 @@ typedef struct Population{
 Population Initialisationpop (int taille);
 
 int taille_population(Population pop);
+void Afficher_population(Population pop);
 
 #endif //INDIVIDU_H_POPULATION_H

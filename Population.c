@@ -69,3 +69,23 @@ int taille_population(Population pop) {
         return n_individus;
     }
 }
+
+void Afficher_population(Population pop){
+    int i=1;
+    Liste_individu tempo;
+    if (pop.indivs==NULL){
+        printf("Liste vide");
+    }
+    else {
+        tempo=pop.indivs;
+        while (tempo->next != NULL) {
+        printf("Individu %d: valeur= %d qualite=%d\n", i,tempo->valeur,tempo->qualite);
+        afficher_list_bit(tempo->liste_de_bit);
+        tempo = tempo->next;
+            i++;
+        }
+    printf("Individu %d: valeur= %d qualite=%d\n", i,tempo->valeur,tempo->qualite);
+    afficher_list_bit(tempo->liste_de_bit);
+    }
+
+}
