@@ -31,4 +31,6 @@ double ValeurIndiv(Listebit liste);
  */
 double QualiteIndiv(double Valeur, int Taille);
 
+Listebit Croise(Listebit l1, Listebit l2, float pCroise);
+
 #endif //LO21_PROJET_INDIVIDU_H

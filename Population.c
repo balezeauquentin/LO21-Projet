@@ -38,8 +38,6 @@ Population Initialisationpop(int taille) {
 }
 
 Population Tri_liste(Population pop) {
-
-
     Liste_individu S1;
     Liste_individu S2;
     if (pop.indivs == NULL) {

@@ -8,8 +8,31 @@
 //Cette fonction permet de créé un individu de manière aléatoire et avec une longueur donnée.
 Listebit InitialisationIndiv(int longIndiv) {
     Listebit l = NULL;
-    l= initialisation_liste_bits(longIndiv);
+    l = initialisation_liste_bits(longIndiv);
     return l;
+}
+
+Listebit Croise(Listebit l1, Listebit l2, float pCroise) {
+    float seuil = pCroise*100;
+    float proba;
+    Bit tempo;
+    if (l1 == NULL) {
+        return l2;
+    } else if (l2 == NULL) {
+        return l1;
+    } else {
+        while (l1 != NULL && l2 != NULL) {
+            proba = rand()%101;
+            if(proba <= seuil){
+                    tempo = l1->valeur;
+                    l1->valeur = l2->valeur;
+                    l2->valeur = tempo;
+            }
+            l1 = l1->next;
+            l2 = l2->next;
+        }
+        return l1;
+    }
 }
 
 //Calcule la valeur d'un individu avec une liste de bit donnée.
