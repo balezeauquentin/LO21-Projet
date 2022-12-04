@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <math.h>
 #include "Individu.h"
 #include "liste_bit.h"
@@ -13,7 +12,7 @@ Listebit InitialisationIndiv(int longIndiv) {
 }
 
 Listebit Croise(Listebit l1, Listebit l2, float pCroise) {
-    float seuil = pCroise*100;
+    float seuil = pCroise * 100;
     float proba;
     Bit tempo;
     if (l1 == NULL) {
@@ -22,11 +21,11 @@ Listebit Croise(Listebit l1, Listebit l2, float pCroise) {
         return l1;
     } else {
         while (l1 != NULL && l2 != NULL) {
-            proba = rand()%101;
-            if(proba <= seuil){
-                    tempo = l1->valeur;
-                    l1->valeur = l2->valeur;
-                    l2->valeur = tempo;
+            proba = rand() % 101;
+            if (proba <= seuil) {
+                tempo = l1->valeur;
+                l1->valeur = l2->valeur;
+                l2->valeur = tempo;
             }
             l1 = l1->next;
             l2 = l2->next;
@@ -44,10 +43,11 @@ double ValeurIndiv(Listebit l) {
         return 0;
     } else {
         while (l != NULL) { //Tant que liste est différent de NULL on fait boucler, on parcourt la liste case par case.
+
             value = value + (l->valeur * pow(2, taille - i)); //Calcule de la valeur bit par bit suivant
-            // l'emplacement du bit et la taille de la chaine.
-            printf("valeur de la chaine : %f valeur du bit : %d valeur de la taille : %d emplacement : %d\n", value,
-                   l->valeur, taille - i, i);
+                                                                    // l'emplacement du bit et la taille de la chaine.
+            printf("----------------------\nvaleur de la chaine : %f valeur du bit : %d valeur de la taille : %d emplacement : %d\n", value, l->valeur, taille - i, i);
+            printf("");
             l = l->next; //Passage à la case suivante.
             i++;
         }
@@ -67,7 +67,8 @@ double QualiteIndiv(double valeur, int taille) {
 }
 
 
-Liste_individu ajout_fin_indiv(Liste_individu l, Bit new_value) {
+/*
+ * Liste_individu ajout_fin_indiv(Liste_individu l, Bit new_value) {
     Listebit tempo;
     Listebit new;
     new = (Listebit) malloc(sizeof(Chaine_de_bit));
@@ -85,6 +86,4 @@ Liste_individu ajout_fin_indiv(Liste_individu l, Bit new_value) {
     }
     return l;
 }
-
-
-
+*/

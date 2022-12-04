@@ -6,16 +6,16 @@
 #include "liste_bit.h"
 
 Population Initialisationpop(int taille) {
-    srand(time(NULL));
     int i = 0;
+    int longueur = rand() % 11;
     Liste_individu personeA;
-    personeA = (Liste_individu) malloc(sizeof(Population));
-    Liste_individu tempo;
+    personeA = (Liste_individu) malloc(sizeof(Liste_individu)*longueur);
+    Liste_individu tempo = (Liste_individu) malloc(sizeof(Population));
     tempo = personeA;
     Listebit l;
-    double valeur;
+    double valeur = 0;
     while (i < taille) {
-        int longueur = rand() % 11;
+
         l = InitialisationIndiv(longueur);
         if (longueur == 0) {
             personeA->liste_de_bit = NULL;
@@ -26,7 +26,6 @@ Population Initialisationpop(int taille) {
             valeur = ValeurIndiv(l);
             personeA->valeur = valeur;
             personeA->qualite = QualiteIndiv(personeA->valeur, longueur);
-            printf("test");
             personeA = personeA->next;
         }
         i++;
@@ -51,6 +50,7 @@ Population Tri_liste(Population pop) {
         }
 
     }
+    return pop;
 }
 
 int taille_population(Population pop) {
@@ -64,8 +64,8 @@ int taille_population(Population pop) {
             n_individus = n_individus + 1;
             point = point->next;
         }
-        return n_individus;
     }
+    return n_individus;
 }
 
 void Afficher_population(Population pop){
@@ -77,13 +77,32 @@ void Afficher_population(Population pop){
     else {
         tempo=pop.indivs;
         while (tempo->next != NULL) {
-        printf("Individu %d: valeur= %d qualite=%d\n", i,tempo->valeur,tempo->qualite);
+        printf("Individu %d: valeur= %f qualite=%f\n", i,tempo->valeur,tempo->qualite);
         afficher_list_bit(tempo->liste_de_bit);
         tempo = tempo->next;
             i++;
         }
-    printf("Individu %d: valeur= %d qualite=%d\n", i,tempo->valeur,tempo->qualite);
+    printf("Individu %d: valeur= %f qualite=%f\n", i,tempo->valeur,tempo->qualite);
     afficher_list_bit(tempo->liste_de_bit);
     }
+}
 
+Population Selection (Population pop, int tSelect){
+    Population trier;
+    Population copie = pop;
+    int i = 0;
+    while(i < tSelect){
+        pop.indivs = pop.indivs->next;
+        trier.indivs->qualite = pop.indivs->qualite;
+        i++;
+    }
+    while(pop.indivs != NULL){
+        pop.indivs = pop.indivs->next;
+        trier.indivs->qualite = copie.indivs->qualite;
+        copie.indivs = copie.indivs->next;
+    }
+    Afficher_population(pop);
+    Afficher_population(trier);
+    Afficher_population(copie);
+    return trier;
 }
