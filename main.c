@@ -8,7 +8,7 @@
 int main() {
     srand(time(NULL)); // initialisation du générateur aléatoire.
 
-    Initialisationpop(3);
+    Initialisationpop(8);
 
     return 0;
 }

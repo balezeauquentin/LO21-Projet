@@ -7,15 +7,16 @@
 
 Population Initialisationpop(int taille) {
     int i = 0;
-    int longueur = rand() % 11;
+    int longueur = rand() % 11 + 1;
     Liste_individu personeA;
-    personeA = (Liste_individu) malloc(sizeof(Liste_individu)*longueur);
-    Liste_individu tempo = (Liste_individu) malloc(sizeof(Population));
+    personeA = (Liste_individu) malloc(sizeof(Liste_individu));
+    Liste_individu tempo = (Liste_individu) malloc(sizeof(Liste_individu));
     tempo = personeA;
     Listebit l;
     double valeur = 0;
     while (i < taille) {
-
+        personeA = (Liste_individu) malloc(sizeof(Population));
+        printf("%d",longueur);
         l = InitialisationIndiv(longueur);
         if (longueur == 0) {
             personeA->liste_de_bit = NULL;
@@ -24,15 +25,17 @@ Population Initialisationpop(int taille) {
             personeA = personeA->next;
         } else {
             valeur = ValeurIndiv(l);
+            printf("test");
             personeA->valeur = valeur;
             personeA->qualite = QualiteIndiv(personeA->valeur, longueur);
             personeA = personeA->next;
         }
         i++;
     }
+    printf("\n\n%d\n\n",i);
     personeA->next = NULL;
     Population population_test;
-    population_test.indivs = tempo;
+    population_test.indivs = personeA;
     return population_test;
 }
 
