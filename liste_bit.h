@@ -1,6 +1,7 @@
 #ifndef LO21_PROJET_LISTE_H
 #define LO21_PROJET_LISTE_H
 
+//#define longIndiv 9
 typedef unsigned char Bit;
 
 typedef struct Chaine_de_bit {

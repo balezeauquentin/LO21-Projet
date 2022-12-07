@@ -7,7 +7,6 @@
 // 1.Initialiser aléatoirement la liste de bits (version iterative)
 Listebit initialisation_liste_bits(int longeur_liste_bits) {
 
-
     Listebit l = NULL;
     int i = 0;
 

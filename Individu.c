@@ -8,6 +8,7 @@
 Listebit InitialisationIndiv(int longIndiv) {
     Listebit l = NULL;
     l = initialisation_liste_bits(longIndiv);
+    l.
     return l;
 }
 
@@ -46,8 +47,8 @@ double ValeurIndiv(Listebit l) {
 
             value = value + (l->valeur * pow(2, taille - i)); //Calcule de la valeur bit par bit suivant
                                                                     // l'emplacement du bit et la taille de la chaine.
-            printf("----------------------\nvaleur de la chaine : %f valeur du bit : %d valeur de la taille : %d emplacement : %d\n", value, l->valeur, taille - i, i);
-            printf("");
+            //printf("----------------------\nvaleur de la chaine : %f valeur du bit : %d valeur de la taille : %d emplacement : %d\n", value, l->valeur, taille - i, i);
+            //printf("");
             l = l->next; //Passage à la case suivante.
             i++;
         }
@@ -67,12 +68,13 @@ double QualiteIndiv(double valeur, int taille) {
 }
 
 
-/*
- * Liste_individu ajout_fin_indiv(Liste_individu l, Bit new_value) {
-    Listebit tempo;
-    Listebit new;
-    new = (Listebit) malloc(sizeof(Chaine_de_bit));
-    new->valeur = new_value;
+Liste_individu ajout_fin_indiv(Liste_individu l, double new_valeur,double new_qualite) {
+    Liste_individu tempo;
+    Liste_individu new;
+    new = (Liste_individu) malloc(sizeof(Chaine_de_bit));
+    new->valeur = new_valeur;
+    new->qualite=new_qualite;
+
     new->next = NULL;
     if (l == NULL) {
         printf("liste vide ajout du dernier element en tete de liste");
@@ -86,4 +88,3 @@ double QualiteIndiv(double valeur, int taille) {
     }
     return l;
 }
-*/

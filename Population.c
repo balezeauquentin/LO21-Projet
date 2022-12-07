@@ -16,23 +16,24 @@ Population Initialisationpop(int taille) {
     double valeur = 0;
     while (i < taille) {
         personeA = (Liste_individu) malloc(sizeof(Population));
-        printf("%d",longueur);
+        //printf("%d",longueur);
         l = InitialisationIndiv(longueur);
         if (longueur == 0) {
+
             personeA->liste_de_bit = NULL;
             personeA->valeur = 0;
             personeA->qualite = 0;
             personeA = personeA->next;
         } else {
             valeur = ValeurIndiv(l);
-            printf("test");
+            //printf("test");
             personeA->valeur = valeur;
             personeA->qualite = QualiteIndiv(personeA->valeur, longueur);
             personeA = personeA->next;
         }
         i++;
     }
-    printf("\n\n%d\n\n",i);
+    //printf("\n\n%d\n\n",i);
     personeA->next = NULL;
     Population population_test;
     population_test.indivs = personeA;
