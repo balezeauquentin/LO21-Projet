@@ -24,10 +24,10 @@ Population Initialisationpop(int taille) {
             personeA->qualite = 0;
             personeA = personeA->next;
         } else {
-            valeur = ValeurIndiv(l);
+            valeur = valeur_lb(l);
             printf("test");
             personeA->valeur = valeur;
-            personeA->qualite = QualiteIndiv(personeA->valeur, longueur);
+            //personeA->qualite = valeur_lb(personeA->valeur);
             personeA = personeA->next;
         }
         i++;
@@ -55,6 +55,7 @@ Population Tri_liste(Population pop) {
     }
     return pop;
 }
+
 
 int taille_population(Population pop) {
     int n_individus;

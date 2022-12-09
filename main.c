@@ -8,7 +8,8 @@
 int main() {
     srand(time(NULL)); // initialisation du générateur aléatoire.
 
-    Initialisationpop(8);
+    taille_population(Initialisationpop(8));
+
 
     return 0;
 }

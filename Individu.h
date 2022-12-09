@@ -22,15 +22,9 @@ Listebit InitialisationIndiv(int longIndiv);
  * La fonction ValeurIndiv prend la chaine de bit pour calculer sa valeur, c'est simplement
  * un changement de base 2 vers base 10. La fonction ValeurIndiv renvoie une valeur entiere.
  */
-double ValeurIndiv(Listebit liste);
 
-/*
- * QualiteIndiv prend en parametre la valeur de l'individu est la taille de sa chaine
- * de bit. Elle calcule la qualité d'un individu, la qualité d'un individu est définie
- * par la fonction suivante : f1(x) = -X^2 où X = (x/2^longIndiv )* (B−A)+ A, A=−1, B=1.
- */
-double QualiteIndiv(double Valeur, int Taille);
 
-Listebit Croise(Listebit l1, Listebit l2, float pCroise);
+
+
 
 #endif //LO21_PROJET_INDIVIDU_H
