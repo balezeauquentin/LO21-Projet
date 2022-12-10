@@ -31,30 +31,45 @@ Listebit initialisation_liste_bits(int longeur_liste_bits) {
 }
 
 //Calcule la valeur d'un individu avec une liste de bit donnée.
-double valeur_lb(Listebit l) {
+int valeur_lb(Listebit l) {
     int taille = taille_liste_bit(l); //Recupération de la taille de la liste chainée.
-    double value = 0;
+
+    int value = 0;
     int i = 1;
     if (taille == 0) { //Cas ou la liste est NULL.
         return 0;
     } else {
         while (l != NULL) { //Tant que liste est différent de NULL on fait boucler, on parcourt la liste case par case.
 
-            value = value + (l->valeur * pow(2, taille - i)); //Calcule de la valeur bit par bit suivant
+            value = value + (l->bit * powf(2, taille - i)); //Calcule de la valeur bit par bit suivant
             // l'emplacement du bit et la taille de la chaine.
-            printf("----------------------\nvaleur de la chaine : %f valeur du bit : %d valeur de la taille : %d emplacement : %d\n",
-                   value, l->valeur, taille - i, i);
-            printf("");
+            //printf("----------------------\nvaleur de la chaine : %d valeur du bit : %d valeur de la taille : %d emplacement : %d\n",
+            //       value, l->bit, taille - i, i);
+            //printf("");
             l = l->next; //Passage à la case suivante.
             i++;
         }
+
         return value;
     }
 }
+
+//Calcule la qualité d'un individu, prend en parametre la valeur de l'individu et sa taille.
+float qualite_lb(int valeur, int longIndiv) {
+
+    float X;
+    float Qualite;
+    int A = -1, B = 1;
+    X = (valeur / powf(2, longIndiv)) * (B - A) + A; //Calcule de X
+    Qualite = -powf(X, 2); //Calcule de la fonction définie par f1(x) = -X^2
+
+    return Qualite;
+}
+
 Listebit ajout_tete_bit(Listebit l, Bit new_value) {
     Listebit new = NULL;
     new = (Listebit) malloc (sizeof(Chaine_de_bit));
-    new->valeur = new_value;
+    new->bit= new_value;
     if (l == NULL) {
         new->next = NULL;
         return new;
@@ -76,9 +91,9 @@ Listebit croise_lb(Listebit l1, Listebit l2, float pCroise) {
         while (l1 != NULL && l2 != NULL) {
             proba = rand() % 101;
             if (proba <= seuil) {
-                tempo = l1->valeur;
-                l1->valeur = l2->valeur;
-                l2->valeur = tempo;
+                tempo = l1->bit;
+                l1->bit = l2->bit;
+                l2->bit = tempo;
             }
             l1 = l1->next;
             l2 = l2->next;
@@ -94,7 +109,7 @@ Listebit ajout_fin_bit(Listebit l, Bit new_value) {
     Listebit new;
     tempo = (Listebit) malloc(sizeof(Chaine_de_bit));
     new = (Listebit) malloc(sizeof(Chaine_de_bit));
-    new->valeur = new_value;
+    new->bit = new_value;
     new->next = NULL;
         if (l == NULL) {
         printf("liste vide ajout du dernier element en tete de liste");
@@ -153,14 +168,23 @@ int taille_liste_bit(Listebit l) {
 void afficher_list_bit(Listebit l){
     Listebit p;
     if (l==NULL){
-        printf("Liste vide");
+        printf("Liste vide ");
     }
     else {
         p=l;
+        printf("\n");
         while (p->next != NULL) {
-            printf("Bit %d \n", p->valeur);
+            printf("Bit %d \n", p->bit);
             p = p->next;
         }
-        printf("Bit %d\n", p->valeur);
+        printf("Bit %d\n", p->bit);
+    }
+}
+
+BOOL vide_lb(Listebit lb){
+    if(lb->next==0||lb!=0||lb!=1){
+        return true;
+    }else{
+        return false;
     }
 }

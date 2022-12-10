@@ -4,44 +4,50 @@
 #include "Individu.h"
 #include "liste_bit.h"
 
-//Cette fonction permet de créé un individu de manière aléatoire et avec une longueur donnée.
-Listebit InitialisationIndiv(int longIndiv) {
-    Listebit l = NULL;
-    l = initialisation_liste_bits(longIndiv);
-    return l;
+//Cette fonction permet de créer un individu de manière aléatoire et avec une longueur donnée.
+
+void affiche_indiv(Liste_individu li) {
+    afficher_list_bit(li->liste_de_bit);
+
+}
+
+int vide(Liste_individu li){
+    if ((li->valeur==0)||(li->qualite=0)||(li->liste_de_bit=NULL)){
+        return true;
+    }else{
+        return false;
+    }
+
 }
 
 
 
 
-//Calcule la qualité d'un individu, prend en parametre la valeur de l'individu et sa taille.
-double QualiteIndiv(double valeur, int taille) {
-    double X;
-    double Qualite;
-    int A = -1, B = 1;
-    X = (valeur / pow(2, taille) * (B - A) + A); //Calcule de X
-    Qualite = -pow(X, 2); //Calcule de la fonction définie par f1(x) = -X^2
-    return Qualite;
-}
 
 
-/*
- * Liste_individu ajout_fin_indiv(Liste_individu l, Bit new_value) {
-    Listebit tempo;
-    Listebit new;
-    new = (Listebit) malloc(sizeof(Chaine_de_bit));
-    new->valeur = new_value;
-    new->next = NULL;
-    if (l == NULL) {
+Liste_individu ajout_fin_indiv(Liste_individu l,Listebit lb,int valeur,float qualite) {
+
+    Liste_individu tempo;
+    Liste_individu ajout_indiv;
+    ajout_indiv = (Liste_individu) malloc(sizeof(Individu));
+    ajout_indiv->liste_de_bit=lb;
+    ajout_indiv->valeur = valeur;
+    ajout_indiv->qualite = qualite;
+    ajout_indiv->next = NULL;
+    if (l==NULL) {
         printf("liste vide ajout du dernier element en tete de liste");
-        return new;
+        l=ajout_indiv;
+
     } else {
         tempo = l;
         while (tempo->next != NULL) {
             tempo = tempo->next;
         }
-        tempo->next = new;
+        tempo->next = ajout_indiv;
     }
+
     return l;
 }
-*/
+
+
+

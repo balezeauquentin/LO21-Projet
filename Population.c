@@ -6,37 +6,25 @@
 #include "liste_bit.h"
 
 Population Initialisationpop(int taille) {
-    int i = 0;
-    int longueur = rand() % 11 + 1;
-    Liste_individu personeA;
-    personeA = (Liste_individu) malloc(sizeof(Liste_individu));
-    Liste_individu tempo = (Liste_individu) malloc(sizeof(Liste_individu));
-    tempo = personeA;
-    Listebit l;
-    double valeur = 0;
-    while (i < taille) {
-        personeA = (Liste_individu) malloc(sizeof(Population));
-        printf("%d",longueur);
-        l = InitialisationIndiv(longueur);
-        if (longueur == 0) {
-            personeA->liste_de_bit = NULL;
-            personeA->valeur = 0;
-            personeA->qualite = 0;
-            personeA = personeA->next;
-        } else {
-            valeur = valeur_lb(l);
-            printf("test");
-            personeA->valeur = valeur;
-            //personeA->qualite = valeur_lb(personeA->valeur);
-            personeA = personeA->next;
-        }
-        i++;
+
+    Liste_individu new_individu;
+    new_individu= (Liste_individu )malloc(sizeof (Individu));
+    Population np; // nouvelle population
+    int val_indiv;
+    float qual_indiv;
+    Listebit lb_indiv;
+    for(int i=0;i<taille;i++) {
+
+        lb_indiv = initialisation_liste_bits(8);
+        val_indiv = valeur_lb(lb_indiv);
+        qual_indiv = qualite_lb(val_indiv, 8);
+        new_individu = ajout_fin_indiv(new_individu, lb_indiv, val_indiv, qual_indiv);
+
     }
-    printf("\n\n%d\n\n",i);
-    personeA->next = NULL;
-    Population population_test;
-    population_test.indivs = personeA;
-    return population_test;
+    np.indivs=new_individu;
+    //free(new_individu);
+    return np;
+
 }
 
 Population Tri_liste(Population pop) {
@@ -73,6 +61,7 @@ int taille_population(Population pop) {
 }
 
 void Afficher_population(Population pop){
+
     int i=1;
     Liste_individu tempo;
     if (pop.indivs==NULL){
@@ -81,12 +70,12 @@ void Afficher_population(Population pop){
     else {
         tempo=pop.indivs;
         while (tempo->next != NULL) {
-        printf("Individu %d: valeur= %f qualite=%f\n", i,tempo->valeur,tempo->qualite);
+        printf("Individu %d: valeur= %d qualite=%f\n", i,tempo->valeur,tempo->qualite);
         afficher_list_bit(tempo->liste_de_bit);
         tempo = tempo->next;
             i++;
         }
-    printf("Individu %d: valeur= %f qualite=%f\n", i,tempo->valeur,tempo->qualite);
+    printf("Individu %d: valeur= %d qualite=%f\n", i,tempo->valeur,tempo->qualite);
     afficher_list_bit(tempo->liste_de_bit);
     }
 }
