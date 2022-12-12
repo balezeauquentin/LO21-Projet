@@ -99,3 +99,44 @@ Population Selection (Population pop, int tSelect){
     Afficher_population(copie);
     return trier;
 }
+
+Liste_individu partition (Liste_individu start, Liste_individu end, double pivot){
+    Liste_individu current = start;
+    Liste_individu pivot_node = end;
+    while (current != pivot_node){
+        // Si la valeur du noeud courant est inférieure au pivot, on l'insère avant le pivot
+        if (current->valeur < pivot)
+        {
+            // Si le noeud courant est la tête de la liste, on met à jour la tête
+            if (current == start)
+                start = current->next;
+
+            // On insère le noeud courant avant le pivot et on met à jour ses liens
+            current->next = pivot_node;
+            pivot_node = current;
+
+            // On avance le pointeur courant vers le prochain noeud
+            current = current->next;
+        }
+    }
+// Retourne le noeud pivot
+    return pivot_node;
+}
+Population Quick_sort_population(Population pop) {
+    double pivot;
+    if (pop.indivs == NULL) {
+        printf("Ne peux etre trie car liste vide");
+        return pop;
+    } else {
+        Liste_individu head = pop.indivs;
+        Liste_individu end = pop.indivs;
+        while (end->next != NULL ){
+            end = end->next;
+        }
+        pivot = pop.indivs->qualite;
+        partition(head,end,pivot);
+        pop.indivs = head;
+    }
+
+    return pop;
+}
