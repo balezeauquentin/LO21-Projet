@@ -35,7 +35,7 @@ Liste_individu ajout_fin_indiv(Liste_individu l,Listebit lb,int valeur,float qua
     ajout_indiv->qualite = qualite;
     ajout_indiv->next = NULL;
     if (l==NULL) {
-        printf("liste vide ajout du dernier element en tete de liste");
+        //printf("liste vide ajout du dernier element en tete de liste");
         l=ajout_indiv;
 
     } else {

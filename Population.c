@@ -8,13 +8,13 @@
 Population Initialisationpop(int taille) {
 
     Liste_individu new_individu;
-    new_individu= (Liste_individu )malloc(sizeof (Individu));
+    //new_individu= (Liste_individu )calloc(taille,sizeof (Individu));
+    new_individu=NULL;
     Population np; // nouvelle population
     int val_indiv;
     float qual_indiv;
     Listebit lb_indiv;
     for(int i=0;i<taille;i++) {
-
         lb_indiv = initialisation_liste_bits(8);
         val_indiv = valeur_lb(lb_indiv);
         qual_indiv = qualite_lb(val_indiv, 8);
