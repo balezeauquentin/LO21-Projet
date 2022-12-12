@@ -172,7 +172,6 @@ void afficher_list_bit(Listebit l){
     }
     else {
         p=l;
-        printf("\n");
         while (p->next != NULL) {
             printf("Bit %d \n", p->bit);
             p = p->next;
