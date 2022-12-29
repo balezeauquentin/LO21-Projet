@@ -30,6 +30,38 @@ Listebit initialisation_liste_bits(int longeur_liste_bits) {
     }
 }
 
+Listebit reste_lb(Listebit l){
+    return l->next;
+}
+
+
+// 1.Initialiser aléatoirement la liste de bits (version recursive)
+
+Listebit initialisation_liste_bits_recursive(int longeur_liste_bits) {
+
+
+    Listebit l = NULL;
+    int i = 0;
+
+    if (longeur_liste_bits == 0) {         //Si la longueur est égale à 0, renvoyé l vide.
+        return l;
+    } else if (longeur_liste_bits == 1) { //Si longueur égale à 1.
+        Bit valeur = rand() % 2; //Initialisation de "valeur" avec un chiffre aléatoire entre 0 et 1.
+        l = ajout_tete_bit(l, valeur); //Ajout en tête de liste la valeur.
+        return l;
+    } else {
+            Bit valeur = rand() % 2;
+            l = ajout_tete_bit(l, valeur);
+            l->next=initialisation_liste_bits_recursive(longeur_liste_bits-1);
+        return l;
+    }
+}
+
+
+
+
+
+
 //Calcule la valeur d'un individu avec une liste de bit donnée.
 int valeur_lb(Listebit l) {
     int taille = taille_liste_bit(l); //Recupération de la taille de la liste chainée.

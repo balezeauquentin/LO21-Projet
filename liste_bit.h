@@ -15,10 +15,12 @@ typedef struct Chaine_de_bit {
 typedef Chaine_de_bit *Listebit ;
 
 Listebit  initialisation_liste_bits(int longeur_liste_bites);
+Listebit initialisation_liste_bits_recursive(int longeur_liste_bits);
 
 
 int valeur_lb(Listebit l);
 BOOL vide_lb(Listebit lb);
+Listebit reste_lb(Listebit l);
 
 /*
  * QualiteIndiv prend en parametre la valeur de l'individu est la taille de sa chaine

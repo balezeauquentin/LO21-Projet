@@ -15,5 +15,6 @@ int taille_population(Population pop);
 void Afficher_population(Population pop);
 Population Selection (Population pop, int tSelect);
 Population Tri_liste(Population pop);
+Population Quick_sort_population(Population pop);
 
 #endif //INDIVIDU_H_POPULATION_H
