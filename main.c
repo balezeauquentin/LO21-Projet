@@ -14,14 +14,11 @@ int main() {
     Listebit list=NULL;
     list= initialisation_liste_bits_recursive(2);
     afficher_list_bit(list);
-
+    int seuil;
 
     int option=0;
-
-    /*
       do{
-  
-          printf("1) \n""Initialiser la Population\n");
+          printf("1) ""Initialiser la Population\n");
           printf("2) Répéter nGen fois\n");
           printf("3) Début \n");
           printf("4) Croiser la Population \n");
@@ -30,41 +27,42 @@ int main() {
           printf("7) Fin \n");
           printf("8) Afficher le meilleur Individu de la Population \n");
           printf("0) Quitter \n");
-
           scanf(" %d",&option);
           switch (option) {
               case 1:
-                  printf("Mot a ajouter ");
+                  printf("-------------Initialisation-------------\n");
                   p1=Initialisationpop(5);
                   Afficher_population(p1);
                   break;
 
               case 2:
-                  printf("Mot a ajouter ");
-                  l=insertion_queue(l);
+
+
+                  printf("-------------Repetition nGen fois-------------\n");
+
                   break;
 
               case 3:
-                  l= supprimer_tete(l);
+                  printf("-------------");
                   break;
 
               case 4:
-                  p1=
+                  printf("-------------Croisement de la population-------------");
                   break;
               case 5:
-                  p1= Quick_sort_population(p1);
+
                   break;
               case 6:
-                  p1= Selection(p1,)
+
+                  printf("Seuil :");
+                  printf("-------------Selection de la population-------------");
+                  scanf("%d",&seuil);
+                  Selection(p1,seuil);
                   break;
               case 8:
-                  l= supprimer_queue(l);
                   break;
           }
 
-      }while(option!=7);
-
-
-  */
+      }while(option!=0);
     return 0;
 }

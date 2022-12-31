@@ -1,97 +1,72 @@
 #include <time.h>
-#include <stdlib.h>
 #include <stdio.h>
+//#include <stdlib.h>
 #include "Population.h"
 #include "Individu.h"
 #include "liste_bit.h"
 
-Population Initialisationpop(int taille) {
+#define longIndiv 8
 
+Population Initialisationpop(int taille) {
     Liste_individu new_individu;
-    //new_individu= (Liste_individu )calloc(taille,sizeof (Individu));
-    new_individu=NULL;
+    new_individu = NULL;
     Population np; // nouvelle population
     int val_indiv;
     float qual_indiv;
     Listebit lb_indiv;
-    for(int i=0;i<taille;i++) {
-        lb_indiv = initialisation_liste_bits(8);
+    for (int i = 0; i < taille; i++) {
+        lb_indiv = initialisation_liste_bits(longIndiv);
         val_indiv = valeur_lb(lb_indiv);
-        qual_indiv = qualite_lb(val_indiv, 8);
+        qual_indiv = qualite_lb(val_indiv);
         new_individu = ajout_fin_indiv(new_individu, lb_indiv, val_indiv, qual_indiv);
-
     }
-    np.indivs=new_individu;
-    //free(new_individu);
+    np.indivs = new_individu;
     return np;
 
 }
 
-Population Tri_liste(Population pop) {
-    Liste_individu S1;
-    Liste_individu S2;
-    if (pop.indivs == NULL) {
-        printf("Ne peux etre trie car liste vide");
-        return pop;
-    } else {
-        if (taille_population(pop) % 2 == 0) {
-
-        } else {
-
-        }
-
-    }
-    return pop;
-}
-
 
 int taille_population(Population pop) {
-    int n_individus;
+    int n_individus = 0;
     if (pop.indivs == NULL) {
-        printf("Ne peux etre trie car liste vide");
         n_individus = 0;
     } else {
-        Liste_individu point = pop.indivs;
-        while (point->next != NULL) {
+
+        while (pop.indivs != NULL) {
             n_individus = n_individus + 1;
-            point = point->next;
+            pop.indivs = pop.indivs->next;
         }
     }
     return n_individus;
 }
 
-void Afficher_population(Population pop){
-
-    int i=1;
+void Afficher_population(Population pop) {
+    int i = 1;
     Liste_individu tempo;
-    if (pop.indivs==NULL){
+    if (pop.indivs == NULL) {
         printf("Liste vide");
-    }
-    else {
-        tempo=pop.indivs;
-        while (tempo->next != NULL) {
-        printf("Individu %d: valeur= %d qualite=%f\n", i,tempo->valeur,tempo->qualite);
-        afficher_list_bit(tempo->liste_de_bit);
-        tempo = tempo->next;
+    } else {
+        tempo = pop.indivs;
+        while (tempo != NULL) {
+            printf("Individu %d: valeur= %d qualite=%f\n", i, tempo->prop.valeur, tempo->prop.qualite);
+            tempo = tempo->next;
             i++;
         }
-    printf("Individu %d: valeur= %d qualite=%f\n", i,tempo->valeur,tempo->qualite);
-    afficher_list_bit(tempo->liste_de_bit);
     }
 }
 
-Population Selection (Population pop, int tSelect){
+Population Selection(Population pop, int tSelect) {
     Population trier;
     Population copie = pop;
     int i = 0;
-    while(i < tSelect){
+    while (i < tSelect) {
         pop.indivs = pop.indivs->next;
-        trier.indivs->qualite = pop.indivs->qualite;
+        trier.indivs->prop.qualite = pop.indivs->prop.qualite;
         i++;
     }
-    while(pop.indivs != NULL){
+    while (pop.indivs != NULL) {
         pop.indivs = pop.indivs->next;
-        trier.indivs->qualite = copie.indivs->qualite;
+        trier.indivs->prop.qualite = copie.indivs->prop.qualite;
         copie.indivs = copie.indivs->next;
     }
     Afficher_population(pop);
@@ -100,43 +75,185 @@ Population Selection (Population pop, int tSelect){
     return trier;
 }
 
-Liste_individu partition (Liste_individu start, Liste_individu end, double pivot){
-    Liste_individu current = start;
-    Liste_individu pivot_node = end;
-    while (current != pivot_node){
-        // Si la valeur du noeud courant est inférieure au pivot, on l'insère avant le pivot
-        if (current->valeur < pivot)
-        {
-            // Si le noeud courant est la tête de la liste, on met à jour la tête
-            if (current == start)
-                start = current->next;
+//fonction partition d'un quicksort de liste simplement chainée qui est de type Liste_individu qui prend en paramètre le début et la fin de la liste et le pivot qui est un double
+Liste_individu partition(Liste_individu start, Liste_individu end, double pivot) {
+    // On initialise les variables
+    Liste_individu new_start = start;
+    Liste_individu pivot_node = start;
+    int i = 0;
+    // On parcourt la liste tant que la qualité est differente du pivot
+    while (pivot_node->prop.qualite != pivot) {
+        pivot_node = pivot_node->next;
+    }
+    // On place le pivot à la fin de la liste
+    int temp_valeur = pivot_node->prop.valeur;
+    float temp_qualite = pivot_node->prop.qualite;
+    Listebit temp_liste_de_bit = pivot_node->prop.liste_de_bit;
 
-            // On insère le noeud courant avant le pivot et on met à jour ses liens
-            current->next = pivot_node;
-            pivot_node = current;
+    pivot_node->prop.valeur = end->prop.valeur;
+    pivot_node->prop.qualite = end->prop.qualite;
+    pivot_node->prop.liste_de_bit = end->prop.liste_de_bit;
 
-            // On avance le pointeur courant vers le prochain noeud
-            current = current->next;
+    end->prop.valeur = temp_valeur;
+    end->prop.qualite = temp_qualite;
+    end->prop.liste_de_bit = temp_liste_de_bit;
+    printf("test 1");
+    // On parcourt la liste
+    while (start != end) {
+        // Si l'élément est inférieur au pivot, on le place au début de la liste
+        printf("test 1");
+        if (start->prop.qualite < pivot) {
+            printf("test 2");
+            // On échange les valeurs
+            temp_qualite = start->prop.qualite;
+            temp_valeur = start->prop.valeur;
+            temp_liste_de_bit = start->prop.liste_de_bit;
+            start->prop.qualite = new_start->prop.qualite;
+            start->prop.valeur = new_start->prop.valeur;
+            start->prop.liste_de_bit = new_start->prop.liste_de_bit;
+            new_start->prop.qualite = temp_qualite;
+            new_start->prop.valeur = temp_valeur;
+            new_start->prop.liste_de_bit = temp_liste_de_bit;
+            // On avance le début de la liste
+            new_start = new_start->next;
+        }
+        // On avance dans la liste
+        if (start->next != NULL) {
+            printf("reussi\n");
+            start = start->next;
+        } else {
+            printf("aled\n");
+            start = start->next;
         }
     }
-// Retourne le noeud pivot
-    return pivot_node;
+
+    // On place le pivot à sa place
+    temp_qualite = new_start->prop.qualite;
+    temp_valeur = new_start->prop.valeur;
+    temp_liste_de_bit = new_start->prop.liste_de_bit;
+    new_start->prop.qualite = end->prop.qualite;
+    new_start->prop.valeur = end->prop.valeur;
+    new_start->prop.liste_de_bit = end->prop.liste_de_bit;
+    end->prop.qualite = temp_qualite;
+    end->prop.valeur = temp_valeur;
+    end->prop.liste_de_bit = temp_liste_de_bit;
+
+    // On retourne le pivot
+    return new_start;
 }
-Population Quick_sort_population(Population pop) {
-    double pivot;
-    if (pop.indivs == NULL) {
-        printf("Ne peux etre trie car liste vide");
-        return pop;
-    } else {
-        Liste_individu head = pop.indivs;
-        Liste_individu end = pop.indivs;
-        while (end->next != NULL ){
-            end = end->next;
-        }
-        pivot = pop.indivs->qualite;
-        partition(head,end,pivot);
-        pop.indivs = head;
-    }
 
-    return pop;
+
+void quicksort(Liste_individu start, Liste_individu end) {
+    // Si la liste est vide ou contient un seul élément, on retourne la liste
+
+    printf("test 1");
+    if (start == NULL || end == NULL || start == end || start->next == end) {
+        return;
+    }else if (start != NULL && start != end) {
+        // On choisit un pivot
+        double pivot = start->prop.qualite;
+
+        // On partitionne la liste autour du pivot
+        Liste_individu pivot_node = partition(start, end, pivot);
+
+        // On trie la liste des éléments inférieurs au pivot
+        quicksort(pivot_node->next, end);
+
+        // On trie la liste des éléments supérieurs au pivot
+        quicksort(start, pivot_node);
+    }
+}
+
+Population croise_pop(Liste_individu l1) {
+    int i = 0;
+    Liste_individu copie = l1;
+    copie = copie->next;
+    Liste_individu croise = l1;
+    Liste_individu pointeur = croise;
+    Population new_pop;
+    float qualite;
+    int valeur;
+    if(l1 == NULL) {
+        new_pop.indivs = NULL;
+        return new_pop;
+    } else if (l1->next == NULL) {
+        new_pop.indivs = l1;
+        return new_pop;
+    }
+    while (copie != NULL || l1 != NULL) {
+
+        if (copie == NULL) {
+            printf("test 1");
+            croise->prop.liste_de_bit = l1->prop.liste_de_bit;
+            croise->prop.valeur = valeur_lb(croise->prop.liste_de_bit);
+            croise->prop.qualite = qualite_lb(croise->prop.valeur);
+            croise->next = NULL;
+            croise = croise->next;
+            l1 = l1->next;
+        } else if (l1 == NULL) {
+            printf("test 2");
+            croise->prop.liste_de_bit = copie->prop.liste_de_bit;
+            croise->prop.valeur = valeur_lb(croise->prop.liste_de_bit);
+            croise->prop.qualite = qualite_lb(croise->prop.valeur);
+            croise->next = NULL;
+            croise = croise->next;
+            copie = copie->next;
+        } else {
+            //croisement des listes de bits
+            croise_lb(l1->prop.liste_de_bit, copie->prop.liste_de_bit, 0.5);
+            //calcul de la valeur et de la qualité pour la l'individu impaire
+            valeur = valeur_lb(l1->prop.liste_de_bit);
+            qualite = qualite_lb(valeur);
+            //ajout de l'individu impaire à la nouvelle liste d'individu
+            croise->prop.liste_de_bit = l1->prop.liste_de_bit;
+            croise->prop.valeur = valeur;
+            croise->prop.qualite = qualite;
+            //on avance dans la liste
+            croise = croise->next;
+            //calcul de la valeur et de la qualité pour la l'individu paire
+            valeur = valeur_lb(copie->prop.liste_de_bit);
+            qualite = qualite_lb(valeur);
+            //ajout de l'individu paire à la nouvelle liste d'individu
+            croise->prop.liste_de_bit = copie->prop.liste_de_bit;
+            croise->prop.valeur = valeur;
+            croise->prop.qualite = qualite;
+            //on avance dans les listes
+            croise = croise->next;
+            if(copie->next == NULL){
+               copie = copie->next;
+            }else{
+                copie = copie->next->next;
+            }
+            l1 = l1->next->next;
+        }
+    }
+    new_pop.indivs = pointeur;
+    return new_pop;
+}
+
+
+void programme(int n_generation) {
+    Population pop;
+
+
+
+
+}
+
+void test(Liste_individu liste) {
+    Liste_individu tempo = liste;
+    int i = 1;
+    while (tempo->next != NULL) {
+        if (tempo->prop.qualite <= tempo->next->prop.qualite) {
+            i++;
+        }
+        tempo = tempo->next;
+    }
+    if (i == 10) {
+        printf("ok");
+    } else {
+        printf("pas ok");
+    }
+    printf("i = %d", i);
+
 }

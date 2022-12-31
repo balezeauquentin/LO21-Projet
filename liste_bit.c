@@ -5,7 +5,7 @@
 #include <time.h>
 #include <math.h>
 
-
+#define longIndiv 8
 
 // 1.Initialiser aléatoirement la liste de bits (version iterative)
 Listebit initialisation_liste_bits(int longeur_liste_bits) {
@@ -72,12 +72,7 @@ int valeur_lb(Listebit l) {
         return 0;
     } else {
         while (l != NULL) { //Tant que liste est différent de NULL on fait boucler, on parcourt la liste case par case.
-
             value = value + (l->bit * powf(2, taille - i)); //Calcule de la valeur bit par bit suivant
-            // l'emplacement du bit et la taille de la chaine.
-            //printf("----------------------\nvaleur de la chaine : %d valeur du bit : %d valeur de la taille : %d emplacement : %d\n",
-            //       value, l->bit, taille - i, i);
-            //printf("");
             l = l->next; //Passage à la case suivante.
             i++;
         }
@@ -87,8 +82,7 @@ int valeur_lb(Listebit l) {
 }
 
 //Calcule la qualité d'un individu, prend en parametre la valeur de l'individu et sa taille.
-float qualite_lb(int valeur, int longIndiv) {
-
+float qualite_lb(int valeur) {
     float X;
     float Qualite;
     int A = -1, B = 1;
@@ -212,10 +206,3 @@ void afficher_list_bit(Listebit l){
     }
 }
 
-BOOL vide_lb(Listebit lb){
-    if(lb->next==0||lb!=0||lb!=1){
-        return true;
-    }else{
-        return false;
-    }
-}
