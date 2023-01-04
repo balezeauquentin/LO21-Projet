@@ -6,7 +6,7 @@
 typedef struct proprietes {
     Listebit liste_de_bit;
     int valeur;
-    float qualite;
+    double qualite;
 } proprietes;
 typedef struct Individu {
     proprietes prop;

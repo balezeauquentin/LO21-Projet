@@ -5,18 +5,24 @@
 #define INDIVIDU_H_POPULATION_H
 
 
-typedef struct Population{
+typedef struct Population {
     Liste_individu indivs;
-}Population;
+} Population;
 
-Population Initialisationpop (int taille);
+Population Initialisationpop(int taille);
 
-int taille_population(Population pop);
 void Afficher_population(Population pop);
-Population Selection (Population pop, int tSelect);
-Population Tri_liste(Population pop);
-void quicksort(Liste_individu start, Liste_individu end) ;
+
+void Afficher_meilleur(Population pop);
+
+void Selection(Population temp, int tSelect);
+
+void quicksort(Liste_individu start, Liste_individu end);
+
 Population croise_pop(Liste_individu l1);
-void test(Liste_individu liste);
+
+int taille_pop(Population pop);
+
+void test(Population pop);
 
 #endif //INDIVIDU_H_POPULATION_H
