@@ -45,8 +45,8 @@ Welcome to the Evolutionary Simulation project! This C-based simulation explores
    ```
    
 
-5. Run the simulation.
-6. 
+4. Run the simulation.
+
    ```bash
    ./evolution_simulation
    ```
