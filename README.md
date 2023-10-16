@@ -41,12 +41,12 @@ Welcome to the Evolutionary Simulation project! This C-based simulation explores
 
    For Windows Users.
    ```bash
-   make
+   gcc -o evolution_simulation.exe main.c Population.c Individu.c liste_bit.c -lm
    ```
    
 
 5. Run the simulation.
-
+6. 
    ```bash
    ./evolution_simulation
    ```
