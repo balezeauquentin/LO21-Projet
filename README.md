@@ -29,22 +29,23 @@ Welcome to the Evolutionary Simulation project! This C-based simulation explores
 1. Clone the repository to your local machine.
 
    ```bash
-   git clone https://github.com/yourusername/evolutionary-simulation.git
-   ```
-
-2. Navigate to the project directory.
-
-   ```bash
-   cd evolutionary-simulation
+   git clone https://github.com/balezeauquentin/LO21-projet.git
    ```
 
 3. Compile the project.
 
+   For Unix Users.
    ```bash
-   gcc -o evolution_simulation main.c Population.c Individu.c liste_bit.c -lm
+   make
    ```
 
-4. Run the simulation.
+   For Windows Users.
+   ```bash
+   make
+   ```
+   
+
+5. Run the simulation.
 
    ```bash
    ./evolution_simulation
